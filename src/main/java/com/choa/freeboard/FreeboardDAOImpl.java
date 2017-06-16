@@ -1,4 +1,6 @@
-package com.choa.notice;
+package com.choa.freeboard;
+
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,13 +15,14 @@ import org.springframework.stereotype.Repository;
 
 import com.choa.board.BoardDAO;
 import com.choa.board.BoardDTO;
+import com.choa.notice.NoticeDTO;
 import com.choa.util.DBConnector;
 import com.choa.util.RowMaker;
 
-@Repository
-//NoticeDAO noticeDao = new NoticeDAO();
-public class NoticeDAOImpl implements BoardDAO {
 
+
+@Repository
+public class FreeboardDAOImpl implements BoardDAO {
 	@Inject
 	private DataSource dataSource;
 	
@@ -28,11 +31,11 @@ public class NoticeDAOImpl implements BoardDAO {
 		Connection con = dataSource.getConnection();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		NoticeDTO boardDTO = null;
+		FreeboardDTO freeboardDTO = null;
 		List<BoardDTO> ar = new ArrayList<BoardDTO>();
 		String sql = "select * from "
 				+ "(select rownum R, N.* from "
-				+ "(select * from notice order by num desc) N) "
+				+ "(select * from freeBoard order by num desc) N) "
 				+ "where R between ? and ?";
 		
 		pst = con.prepareStatement(sql);
@@ -40,14 +43,18 @@ public class NoticeDAOImpl implements BoardDAO {
 		pst.setInt(2, rowMaker.getLastRow());
 		rs = pst.executeQuery();
 		while(rs.next()){
-			boardDTO = new NoticeDTO();
-			boardDTO.setContents(rs.getString("contents"));
-			boardDTO.setHit(rs.getInt("hit"));
-			boardDTO.setNum(rs.getInt("num"));
-			boardDTO.setTitle(rs.getString("title"));
-			boardDTO.setWriter(rs.getString("writer"));
-			boardDTO.setReg_date(rs.getDate("reg_date"));
-			ar.add(boardDTO);
+			freeboardDTO = new FreeboardDTO();
+			freeboardDTO.setContents(rs.getString("contents"));
+			freeboardDTO.setHit(rs.getInt("hit"));
+			freeboardDTO.setNum(rs.getInt("num"));
+			freeboardDTO.setTitle(rs.getString("title"));
+			freeboardDTO.setWriter(rs.getString("writer"));
+			freeboardDTO.setReg_date(rs.getDate("reg_date"));
+			freeboardDTO.setRef(rs.getInt("ref"));
+			freeboardDTO.setStep(rs.getInt("step"));
+			freeboardDTO.setDepth(rs.getInt("depth"));
+			System.out.println(freeboardDTO.getDepth());
+			ar.add(freeboardDTO);
 		}
 		DBConnector.disConnect(rs, pst, con);
 		
@@ -59,26 +66,30 @@ public class NoticeDAOImpl implements BoardDAO {
 		Connection con = dataSource.getConnection();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		NoticeDTO noticeDTO = new NoticeDTO();
+		FreeboardDTO freeboardDTO = null;
 		
-		String sql = "select * from notice where num = ?";
+		String sql = "select * from freeboard where num = ?";
 		
 		pst = con.prepareStatement(sql);
 		pst.setInt(1, num);
 		rs = pst.executeQuery();
 		if(rs.next()){
-			noticeDTO.setContents(rs.getString("contents"));
-			noticeDTO.setHit(rs.getInt("hit"));
-			noticeDTO.setNum(rs.getInt("num"));
-			noticeDTO.setTitle(rs.getString("title"));
-			noticeDTO.setWriter(rs.getString("writer"));
-			noticeDTO.setReg_date(rs.getDate("reg_date"));
+			freeboardDTO = new FreeboardDTO();
+			freeboardDTO.setTitle(rs.getString("title"));
+			freeboardDTO.setNum(rs.getInt("num"));
+			freeboardDTO.setWriter(rs.getString("writer"));
+			freeboardDTO.setHit(rs.getInt("hit"));
+			freeboardDTO.setReg_date(rs.getDate("reg_date"));
+			freeboardDTO.setContents(rs.getString("contents"));
+			freeboardDTO.setRef(rs.getInt("ref"));
+			freeboardDTO.setStep(rs.getInt("step"));
+			freeboardDTO.setDepth(rs.getInt("depth"));
 			
 		}
 		//close
 		DBConnector.disConnect(rs, pst, con);
 		
-		return noticeDTO;
+		return freeboardDTO;
 	}
 	@Override
 	public int boardWrite(BoardDTO boardDTO) throws Exception {
@@ -86,7 +97,7 @@ public class NoticeDAOImpl implements BoardDAO {
 		PreparedStatement st= null;
 		
 		int result=0;
-		String sql = "insert into notice values(notice_seq.nextval, ?,?,?, sysdate, 0)";
+		String sql = "insert into freeboard values(notice_seq.nextval, ?, ?, ?, 0, sysdate, notice_seq.currval, 0, 0)";
 		
 			st = con.prepareStatement(sql);
 			st.setString(1, boardDTO.getWriter());
@@ -102,7 +113,7 @@ public class NoticeDAOImpl implements BoardDAO {
 		Connection con = dataSource.getConnection();
 		PreparedStatement st = null;
 		int result=0;
-		String sql ="update notice set title=?, contents=? where num=?";
+		String sql ="update freeboard set title = ?, contents = ? where num = ?";
 		
 			st = con.prepareStatement(sql);
 			st.setString(1, boardDTO.getTitle());
@@ -117,7 +128,7 @@ public class NoticeDAOImpl implements BoardDAO {
 		Connection con = dataSource.getConnection();
 		PreparedStatement st= null;
 		int result=0;
-		String sql ="delete notice where num=?";
+		String sql = "delete freeboard where num = ?";
 		st= con.prepareStatement(sql);
 		st.setInt(1, num);
 		result = st.executeUpdate();
@@ -132,7 +143,7 @@ public class NoticeDAOImpl implements BoardDAO {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		int result=0;
-		String sql ="select nvl(count(num),0) from notice";
+		String sql ="select nvl(count(num),0) from freeboard";
 		
 			pst= con.prepareStatement(sql);
 			
@@ -149,7 +160,7 @@ public class NoticeDAOImpl implements BoardDAO {
 		Connection con = dataSource.getConnection();
 		PreparedStatement st= null;
 		
-		String sql ="update notice set hit=hit+1 where num=?";
+		String sql ="update freeboard set hit=hit+1 where num=?";
 		
 			st = con.prepareStatement(sql);
 			st.setInt(1, num);
@@ -159,6 +170,5 @@ public class NoticeDAOImpl implements BoardDAO {
 		
 		
 	}
-	
-
+		
 }

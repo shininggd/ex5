@@ -8,7 +8,7 @@
 </head>
 <body>
 <form action="notice${path }" method="post">
- <%-- <input type="hidden"  name="num" value="${dto.num }" > --%> 
+  <input type="hidden"  name="num" value="${dto.num }" > 
 작성자 :<input type="text"  name="writer"${dto.writer } ><br>
 제목: <input type="text" name="title" value="${dto.title }"> <br>
 내용:<br> <textarea rows="20" cols="20" name="contents">${dto.contents }</textarea><br>
