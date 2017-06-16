@@ -6,9 +6,13 @@
 </head>
 <body>
 <h1>
+<a href="./notice/noticeList">NoticeList</a><br>
+<a href="./freeboard/freeboardList">FreeboardList</a>
 	Hello world!  
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+
 </body>
 </html>
