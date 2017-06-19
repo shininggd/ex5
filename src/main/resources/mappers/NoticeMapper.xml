@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="NoticeMapper"><!--.xml 을 지외한 파일 명  -->
+  	<select id="view" resultType="com.choa.notice.NoticeDTO" parameterType="java.lang.Integer">
+  		select * from notice where num = #{num}<!--파라미터 이름  -->
+  	</select>
+  	<insert id="write" parameterType="com.choa.notice.NoticeDTO">
+  	insert into notice values(notice_seq.nextval, #{writer},#{title},#{contents}, sysdate, 0)
+  	</insert>
+  	<delete id="delete" parameterType="java.lang.Integer">
+  	delete from notice where num = #{num}
+  	</delete> 
+  	<update id="update" parameterType="com.choa.notice.NoticeDTO">
+  	update notice set title=#{title}, contents=#{contents} where num=#{num}
+  	</update>
+  	
+<select id="list" resultType="com.choa.notice.NoticeDTO" parameterType="com.choa.util.RowMaker">
+  select * from 
+  (select rownum R, N.* from 
+  (select * from notice order by num desc) N) 
+  where R between #{startRow} and #{lastRow}
+</select> 
+  	<!--insert, update, delete는 리절트m 타입을 알고 있따.  -->
+  	
+  	<select id="count" resultType="java.lang.Integer">
+  	select nvl(count(num),0) from notice
+  	</select>
+  	  	
+  </mapper>

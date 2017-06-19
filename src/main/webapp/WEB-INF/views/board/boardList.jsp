@@ -22,7 +22,7 @@
 	<c:catch>
 	<c:forEach  begin="1" end="${dto.depth }">&nbsp;</c:forEach>
 	</c:catch>
-	<td>${dto.num }</td><td><a href="./noticeView?num=${dto.num }">${dto.title }</a> </td><td>${dto.writer }</td><td>${dto.reg_date }</td><td>${dto.hit }</td>
+	<td>${dto.num }</td><td><a href="./${board }View?num=${dto.num }">${dto.title }</a> </td><td>${dto.writer }</td><td>${dto.reg_date }</td><td>${dto.hit }</td>
 	</tr>
 	</c:forEach>
 

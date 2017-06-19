@@ -14,13 +14,20 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	
+
+	<!-- <context:component-scan base-package="com.choa.ex5" use-default-filters="false" >
+		true면 기본적으로 모든걸 찾는거 false면 모찾게 하는거
+		<context:include-filter type="annotation" expression="com.choa.ex5.HomeController"/>포함시켜야 할것
+		<context:exclude-filter type="annotation" expression="com.choa.ex5.NoticeController"/>제외시켜야할것 
+	</context:component-scan> -->
 	<context:component-scan base-package="com.choa.ex5" />
 	<context:component-scan base-package="com.choa.notice" />
 	<context:component-scan base-package="com.choa.freeboard" />
