@@ -18,7 +18,7 @@
 				<option value="writer">WRITER</option>
 				<option value="contents">CONTENTS</option>
 			</select>
-			<input type="text" name="find">
+			<input type="text" name="find" value="${listInfo.find}">
 			<input type="submit" value="SEARCH">
 		
 		</form>
@@ -49,10 +49,10 @@
 	<a href="${board }List?curPage=${listInfo.startNum-1 }&search=${listInfo.search}&find=${listInfo.search}">[이전]</a>
 	</c:if>
 	<c:forEach begin="${listInfo.startNum }" end="${listInfo.lastNum }" var="i">
-	<a href="${board }List?curPage=${i}&search=${listInfo.search}&find=${listInfo.search}">${i} </a>
+	<a href="${board }List?curPage=${i}&search=${listInfo.search}&find=${listInfo.find}">${i} </a>
 	</c:forEach>
 	<c:if test="${listInfo.curBlock<listInfo.totalBlock }">
-	<a href="${board }List?curPage=${listInfo.lastNum+1 }&search=${listInfo.search}&find=${listInfo.search}">[이후]</a>
+	<a href="${board }List?curPage=${listInfo.lastNum+1 }&search=${listInfo.search}&find=${listInfo.find}">[이후]</a>
 	</c:if>
 	
 	
