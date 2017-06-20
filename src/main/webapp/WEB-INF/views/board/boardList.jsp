@@ -15,6 +15,8 @@
 		});
 		$('.num').click(function() {
 			alert($(this).attr('title'));
+			location.href ="${board }List?curPage="+$(this).attr('title')+"&search=${listInfo.search}&find=${listInfo.find}";
+			
 		});
 		$("#after").click(function() {
 			alert('담배피고 싶다.');
