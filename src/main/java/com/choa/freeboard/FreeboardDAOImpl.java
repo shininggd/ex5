@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.choa.board.BoardDAO;
 import com.choa.board.BoardDTO;
-
+import com.choa.util.ListInfo;
 import com.choa.util.RowMaker;
 
 
@@ -24,48 +24,48 @@ public class FreeboardDAOImpl implements BoardDAO {
 	private SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "FreeboardMapper."; //FINAL 로 인해 상수치급 하면 변수명은 대문자
-	
+
 	@Override
-	public List<BoardDTO> boardList(RowMaker rowMaker) throws Exception {
-		
-		return sqlSession.selectList(NAMESPACE+"list", rowMaker);//매개변수는 한개~
-	
+	public List<BoardDTO> boardList(ListInfo listInfo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 	@Override
 	public BoardDTO boardView(int num) throws Exception {
-BoardDTO boardDTO = sqlSession.selectOne(NAMESPACE+"view", num);
-		
-		return boardDTO;
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 	@Override
 	public int boardWrite(BoardDTO boardDTO) throws Exception {
-		int result = sqlSession.insert(NAMESPACE+"write", boardDTO);
-		return result;
+		// TODO Auto-generated method stub
+		return 0;
 	}
+
 	@Override
 	public int boardUpdate(BoardDTO boardDTO) throws Exception {
-int result= sqlSession.update(NAMESPACE+"update",boardDTO);
-		
-		return result;
+		// TODO Auto-generated method stub
+		return 0;
 	}
+
 	@Override
 	public int boardDelete(int num) throws Exception {
-int result =sqlSession.delete(NAMESPACE+"delete", num);
-		
-		return result;
-		
+		// TODO Auto-generated method stub
+		return 0;
 	}
+
 	@Override
-	public int boardCount(RowMaker rowMaker) throws Exception {
-		int result=sqlSession.selectOne(NAMESPACE+"count");		
-		return result;
+	public int boardCount(ListInfo listInfo) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
 	}
+
 	@Override
 	public void boardHit(int num) throws Exception {
-		
-		
-		
+		// TODO Auto-generated method stub
 		
 	}
-		
+	
+			
 }

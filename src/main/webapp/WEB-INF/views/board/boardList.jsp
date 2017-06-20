@@ -9,19 +9,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#before").click(function() {
-			alert('담배피고 싶다.');
-			
-		});
+		
 		$('.num').click(function() {
-			alert($(this).attr('title'));
-			location.href ="${board }List?curPage="+$(this).attr('title')+"&search=${listInfo.search}&find=${listInfo.find}";
-			
+			/* location.href ="${board }List?curPage="+$(this).attr('id')+"&search=${listInfo.search}&find=${listInfo.find}"; */
+			document.frm.curPage.value=$(this).attr('id');
+			document.frm.search.value='${listInfo.search}';
+			document.frm.find.value='${listInfo.find}';
+			document.frm.submit();
 		});
-		$("#after").click(function() {
-			alert('담배피고 싶다.');
-			
-		});
+		
 		
 		
 	});
@@ -32,7 +28,8 @@
 	<h1>${board}</h1>
 	
 	<div>
-		<form action="${board}List">
+		<form action="${board}List" name="frm">
+		<input type="hidden" name="curPage">
 			<select name="search">
 				<option value="title">TITLE</option>
 				<option value="writer">WRITER</option>
@@ -66,14 +63,15 @@
 		
 	</table>
 	<c:if test="${listInfo.curBlock>1 }">
-	<span id="before">[이전]</span>
+	<span class="num" id="${listInfo.startNum-1 }">[이전]</span>
 	</c:if>
 	<c:forEach begin="${listInfo.startNum }" end="${listInfo.lastNum }" var="i">
-	<span class="num" title="${i }">${i }</span>
+	<span class="num" id="${i }">${i }</span>
 	</c:forEach>
 	<c:if test="${listInfo.curBlock<listInfo.totalBlock }">
-	<span id="after">[다음]</span>
+	<span class="num" id="${listInfo.lastNum+1 }">[다음]</span>
 	</c:if>
+	
 	
 	
 	<br>

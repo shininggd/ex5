@@ -31,15 +31,7 @@ public class NoticeDAOImplTest extends MyAbstractTest {
 	
 	@Test
 	public void connectionTest() throws Exception{
-		
-		RowMaker rowMaker = new RowMaker();
-		rowMaker.setKind("writer");
-		rowMaker.setSearch("44");
-		System.out.println("asdlkfjalskfjkl;asdflkasjlkf;jasdl;kdf");
-		List<BoardDTO> ar = noticeDAOImpl.boardList(rowMaker);
-		System.out.println("sese"+ar.get(0).getWriter());
-		
-		assertNotEquals( 0,ar.size());
+
 	}
 	
 }
