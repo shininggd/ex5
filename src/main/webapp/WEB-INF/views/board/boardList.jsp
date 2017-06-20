@@ -6,6 +6,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#before").click(function() {
+			alert('담배피고 싶다.');
+			
+		});
+		$('.num').click(function() {
+			alert($(this).attr('title'));
+		});
+		$("#after").click(function() {
+			alert('담배피고 싶다.');
+			
+		});
+		
+		
+	});
+</script>
 </head>
 <body>
 	<!-- List 제목 -->
@@ -46,13 +64,13 @@
 		
 	</table>
 	<c:if test="${listInfo.curBlock>1 }">
-	<a href="${board }List?curPage=${listInfo.startNum-1 }&search=${listInfo.search}&find=${listInfo.search}">[이전]</a>
+	<span id="before">[이전]</span>
 	</c:if>
 	<c:forEach begin="${listInfo.startNum }" end="${listInfo.lastNum }" var="i">
-	<a href="${board }List?curPage=${i}&search=${listInfo.search}&find=${listInfo.find}">${i} </a>
+	<span class="num" title="${i }">${i }</span>
 	</c:forEach>
 	<c:if test="${listInfo.curBlock<listInfo.totalBlock }">
-	<a href="${board }List?curPage=${listInfo.lastNum+1 }&search=${listInfo.search}&find=${listInfo.find}">[이후]</a>
+	<span id="after">[다음]</span>
 	</c:if>
 	
 	
