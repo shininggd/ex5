@@ -56,7 +56,7 @@ int result =sqlSession.delete(NAMESPACE+"delete", num);
 		
 	}
 	@Override
-	public int boardCount() throws Exception {
+	public int boardCount(RowMaker rowMaker) throws Exception {
 		int result=sqlSession.selectOne(NAMESPACE+"count");		
 		return result;
 	}

@@ -9,8 +9,7 @@ public class BoardDTO {
 	private String contents;
 	private Date reg_date;
 	private int hit;
-	
-	
+		
 	public Integer getNum() {
 		return num;
 	}
@@ -47,6 +46,5 @@ public class BoardDTO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	
 
 }

@@ -6,8 +6,7 @@
   <select id="list" resultType="com.choa.freeboard.FreeboardDTO" parameterType="com.choa.util.RowMaker">
  select * from 
 (select rownum R, N.* from 
-(select * from freeboard order by num desc) N)
-where R between #{startRow} and #{lastRow}
+(select * from freeboard where #{kind} like '%'||#{search}||'%' order by num desc) N)where R between #{startRow} and #{lastRow}
   </select>
   <select id="count" resultType="java.lang.Integer">
   select nvl(count(num),0) from freeboard

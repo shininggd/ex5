@@ -31,15 +31,15 @@ public class NoticeDAOImplTest extends MyAbstractTest {
 	
 	@Test
 	public void connectionTest() throws Exception{
-		PageMaker maker = new PageMaker(1);
 		
-		List<BoardDTO> ar = noticeDAOImpl.boardList(maker.getRowMaker("", ""));
+		RowMaker rowMaker = new RowMaker();
+		rowMaker.setKind("writer");
+		rowMaker.setSearch("44");
+		System.out.println("asdlkfjalskfjkl;asdflkasjlkf;jasdl;kdf");
+		List<BoardDTO> ar = noticeDAOImpl.boardList(rowMaker);
+		System.out.println("sese"+ar.get(0).getWriter());
+		
 		assertNotEquals( 0,ar.size());
 	}
-	@Test
-	public void contTest() throws Exception{
-		int count = noticeDAOImpl.boardCount();
-		assertNotEquals( 0,count);
-		
-	}
+	
 }

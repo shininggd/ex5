@@ -1,41 +1,39 @@
 package com.choa.util;
 
 public class PageMaker {
-	private int perPage;
-	private int perBlock;
 	private int curPage;
-	private MakePage makePage;
-	private RowMaker rowMaker;
+	private int perPage;
+	private int totalCount;
+	private int perBlock;
 	
-	
-	public PageMaker(int curPage){
-		this(10, curPage);
+	public PageMaker(int curPage, int totalCount) {
+		this(curPage, totalCount, 10);
 	}
 	
-	public PageMaker(int perPage, int curPage){
-		this(perPage, 5, curPage);
-	}
-	
-	public PageMaker(int perPage, int perBlock, int curPage) {
+	public PageMaker(int curPage, int totalCount, int perPage){
+		this.curPage=curPage;
+		this.totalCount=totalCount;
 		this.perPage=perPage;
-		this.perBlock=perBlock;
-		this.curPage = curPage;
-	}
-
-	public MakePage getMakePage(int totalCount) {
-		makePage = new MakePage();
-		makePage.makePage(totalCount, curPage, perPage, perBlock);
-		return makePage;
-	}
-
-	public RowMaker getRowMaker(String kind, String search) {
-		rowMaker = new RowMaker();
-		rowMaker.setRow(curPage, perPage);
-		rowMaker.setKind(kind);
-		rowMaker.setSearch(search);
-		return rowMaker;
+		this.perBlock=5;
 	}
 	
+	
+	
+	//startRow, lastRow
+	public RowMaker getRowMaker(){
+		RowMaker rowMaker = new RowMaker();
+		rowMaker.makeRow(curPage, perPage);
+		return rowMaker;
+		
+	}
+	
+	//startNum, lastNum
+	public MakePage getPageResult(){
+		MakePage pageResult = new MakePage();
+		pageResult.makePage(totalCount, perPage, perBlock, curPage);
+		return pageResult;
+	}
+
 	
 	
 

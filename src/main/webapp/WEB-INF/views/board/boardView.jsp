@@ -12,8 +12,8 @@
 제목: ${dto.title } <br>
 날짜: ${dto.reg_date }<br>
 조회수: ${dto.hit }<br>
-<a href="freeboardDelete?num=${dto.num }">딜리트로 간다.</a>
-<a href="freeboardUpdate?num=${dto.num }">업데이트로 간다.</a>
-<a href="freeboardList">리스트로 간다.</a>
+<a href="${board }Delete?num=${dto.num }">딜리트로 간다.</a>
+<a href="${board }Update?num=${dto.num }">업데이트로 간다.</a>
+<a href="${board }List">리스트로 간다.</a>
 </body>
 </html>

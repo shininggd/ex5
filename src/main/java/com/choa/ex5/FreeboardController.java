@@ -36,8 +36,9 @@ public class FreeboardController {
 		if(result>0){
 			message = "SUCCESS";
 		}
+		rd.addAttribute("board", "freeboard");
 		rd.addFlashAttribute("message", message);
-		return "redirect:freeboardList";
+		return "redirect:boardList";
 		
 	}
 	@RequestMapping(value="freeboardView")
@@ -52,8 +53,8 @@ public class FreeboardController {
 	}
 	
 	@RequestMapping(value="freeboardList")
-	public String boardList(@RequestParam(defaultValue="1")Integer curPage, Model model)throws Exception{
-		List<BoardDTO> ar = freeboardService.boardList(curPage);
+	public String boardList(@RequestParam(defaultValue="1")Integer curPage, Model model,@RequestParam(defaultValue="writer") String kind,@RequestParam(defaultValue="") String search)throws Exception{
+		List<BoardDTO> ar = freeboardService.boardList(curPage, kind, search);
 		model.addAttribute("list", ar);
 		model.addAttribute("board","freeboard");
 		System.out.println("List로 가자");

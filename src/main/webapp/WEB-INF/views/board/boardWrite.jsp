@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="freeboard${path }" method="post">
+<form action="${board}${path }" method="post">
   <input type="hidden"  name="num" value="${dto.num }" > 
 작성자 :<input type="text"  name="writer"value=${dto.writer } ><br>
 제목: <input type="text" name="title" value="${dto.title }"> <br>

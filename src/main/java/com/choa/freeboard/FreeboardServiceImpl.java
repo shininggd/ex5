@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.choa.board.BoardDTO;
 import com.choa.board.BoardService;
-
+import com.choa.util.ListInfo;
 import com.choa.util.MakePage;
 import com.choa.util.PageMaker;
 import com.choa.util.RowMaker;
@@ -20,12 +20,9 @@ public class FreeboardServiceImpl implements BoardService  {
 	private FreeboardDAOImpl freeboardDAO;
 	
 	@Override
-	public List<BoardDTO> boardList(int curPage) throws Exception {
-		int totalCount = freeboardDAO.boardCount();
-		PageMaker pageMaker = new PageMaker(curPage);
-		MakePage makePage = pageMaker.getMakePage(totalCount);
-		RowMaker rowMaker = pageMaker.getRowMaker("", "");
-		return freeboardDAO.boardList(rowMaker);
+	public List<BoardDTO> boardList(ListInfo listInfo) throws Exception {
+	
+		return null;
 	}
 	@Override
 	public BoardDTO boardView(int num) throws Exception {
